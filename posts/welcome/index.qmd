@@ -7,4 +7,3 @@ categories: [week 3, homework]
 
 This is the first post in a Quarto blog. Welcome!
 I will add my projects here!
-
