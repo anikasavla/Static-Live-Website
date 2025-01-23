@@ -2,10 +2,9 @@
 title: "Welcome To My Blog"
 author: "Anika Savla"
 date: "2025-01-23"
-categories: [news]
+categories: [week 3, homework]
 ---
 
 This is the first post in a Quarto blog. Welcome!
-
 I will add my projects here!
 
