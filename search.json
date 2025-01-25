@@ -21,17 +21,10 @@
     "text": "import pandas as pd\nfrom matplotlib import pyplot as plt\nimport seaborn as sns\nurl = \"https://raw.githubusercontent.com/pic16b-ucla/24W/main/datasets/palmer_penguins.csv\"\npenguins = pd.read_csv(url)\n\n\ndf = penguins[penguins[\"Sex\"].isin([\"MALE\", \"FEMALE\"])].copy()\ndf[\"Species\"] = df[\"Species\"].str.split().str[0]\npalette = sns.color_palette(\"flare\", n_colors=3)\nsns.set_theme(style='whitegrid', font_scale=1.0)\nfig, ax = plt.subplots(2, 1, figsize=(6, 6), sharex=True)\n\nmale_data = df[df[\"Sex\"] == \"MALE\"]\nsns.boxplot(data=male_data, x=\"Body Mass (g)\", y=\"Species\", hue=\"Species\",palette=palette, width=0.6, dodge = False, ax=ax[0])\nax[0].set(xlabel=\"\", title=\"Male\", ylabel=\"Species\")\nax[0].legend(title=\"Species\")\n\nfemale_data = df[df[\"Sex\"] == \"FEMALE\"]\nsns.boxplot(data=female_data, x=\"Body Mass (g)\", y=\"Species\", hue=\"Species\",palette=palette, width=0.6, dodge = False, ax=ax[1])\nax[1].set(ylabel=\"Species\", xlabel = \"Body Mass (g)\", title=\"Female\")\n\nplt.tight_layout()\nplt.show()"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "myblog",
     "section": "",
-    "text": "HW 0\n\n\n\n\n\n\nweek 3\n\n\nhomework\n\n\n\n\n\n\n\n\n\nJan 23, 2025\n\n\nAnika Savla\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nweek 3\n\n\nhomework\n\n\n\n\n\n\n\n\n\nJan 23, 2025\n\n\nAnika Savla\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\nNo matching items"
+    "text": "HW 0\n\n\n\n\n\n\nweek 3\n\n\nhomework\n\n\n\n\n\n\n\n\n\nJan 23, 2025\n\n\nAnika Savla\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nweek 3\n\n\nhomework\n\n\n\n\n\n\n\n\n\nJan 23, 2025\n\n\nAnika Savla\n\n\n\n\n\n\nNo matching items"
   }
 ]
