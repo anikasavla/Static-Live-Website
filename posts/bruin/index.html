@@ -197,21 +197,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This tutorial will show and explain the code to analyze a dataframe through the creation of a visualization. It will use the Palmer’s Penguin dataset, but these strategies can be expanded for other dataframes and visualization choices.</p>
 <section id="preliminary-setup" class="level2">
 <h2 class="anchored" data-anchor-id="preliminary-setup">Preliminary Setup</h2>
-<p>In order to create an interesting visualization of the Palmer Penguins data set, it is first necessary to import the data and necessary packages. For this specific visualization, I imported the pandas, matplotlib, and seaborn libraries. The pandas library will allow us to convert the data into a data fram that can be analyzed. Using matplotlib and seaborn, I can create graphs that will depict the chosen features and aspects of the graph.</p>
-<div id="6a51d46a-ee7d-46ab-b151-a5fb7f99ecad" class="cell" data-execution_count="89">
+<p>In order to create an interesting visualization of the Palmer Penguins data set, it is first necessary to import the data and necessary packages. For this specific visualization, I imported the pandas, matplotlib, and seaborn libraries. The pandas library will allow us to convert the data into a data frame that can be analyzed. Using matplotlib and seaborn, I can create graphs that will depict the chosen features and aspects of the graphs.</p>
+<div id="6a51d46a-ee7d-46ab-b151-a5fb7f99ecad" class="cell" data-execution_count="212">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import the necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bd94ad96-f63f-4ddd-aeed-bb22faf124d0" class="cell" data-execution_count="91">
+<div id="bd94ad96-f63f-4ddd-aeed-bb22faf124d0" class="cell" data-execution_count="214">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame using the data and pandas library</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/pic16b-ucla/24W/main/datasets/palmer_penguins.csv"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1f2133ab-a927-4585-98d5-0218e91f198f" class="cell" data-execution_count="92">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="92">
+<div id="1f2133ab-a927-4585-98d5-0218e91f198f" class="cell" data-execution_count="216">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#visualizing the data frame allows us to see the different features</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="216">
 <div>
 
 
@@ -349,42 +350,156 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-selection" class="level2">
 <h2 class="anchored" data-anchor-id="data-selection">Data Selection</h2>
 <p>The next step to create these visualizations is to decide which features of the dataset that you would want to illustration. I personally chose to see how the body mass of penguins differs depending on their sex for each species. Because I now know the features I want to analyze, I can isolate each of those columns for future steps.</p>
+<div id="6f73f337-2a54-4243-be80-65e68821e357" class="cell" data-execution_count="236">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a copy of the data frame with chosen features</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> penguins[[<span class="st">"Sex"</span>, <span class="st">"Body Mass (g)"</span>, <span class="st">"Species"</span>]].copy()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="236">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Body Mass (g)</th>
+<th data-quarto-table-cell-role="th">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>MALE</td>
+<td>3750.0</td>
+<td>Adelie Penguin (Pygoscelis adeliae)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>FEMALE</td>
+<td>3800.0</td>
+<td>Adelie Penguin (Pygoscelis adeliae)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>FEMALE</td>
+<td>3250.0</td>
+<td>Adelie Penguin (Pygoscelis adeliae)</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Adelie Penguin (Pygoscelis adeliae)</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>FEMALE</td>
+<td>3450.0</td>
+<td>Adelie Penguin (Pygoscelis adeliae)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
-<p>The next step in the process is cleaning the relevant data by removing any penguins subjects with any missing measurements. Some penguins for example did not have their sex specified within the data frame, so removing the rows of each penguin without their sex being either male or female ensures that the data is complete. The same conditions applied for penguins without an integer to represent their body mass in grams. This cleanup removed 11 of the penguins from the visualization but ensured that the ones which were represented contained all the necessary information. I also changed the species labels to just include the species name rather than the excessive “Species” ending in the title for better readability.</p>
-<div id="94434425-5781-45c3-88bc-affdc8a87fd0" class="cell" data-execution_count="99">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#remove any values from the data frame where the sex is not male or female</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> penguins[penguins[<span class="st">"Sex"</span>].isin([<span class="st">"MALE"</span>, <span class="st">"FEMALE"</span>])].copy()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#remove any values from the data frame where body mass is not an integer to represent grams</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Body Mass (g)"</span>].notnull().copy()]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#shorten the species names to avoid redundancy</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Species"</span>] <span class="op">=</span> df[<span class="st">"Species"</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The next step in the process is cleaning the relevant data by removing any penguins subjects with any missing measurements. Now that the data frame only contains the features for the graph, we can use the dropna function, which removes the rows with any null values. Had we done this before we removed the unnecessary columns, we could have unnecessarily removed rows where irrelavent columns didn’t have data. Also, we have to ensure that the Sex values are either Male or Female as there was one penguin without a null value or valid one. This cleanup removed 11 of the penguins from the visualization but ensured that the ones which were represented contained all the necessary information. I also changed the species labels to just include the species name rather than the excessive “Species” ending in the title for better readability.</p>
+<div id="94434425-5781-45c3-88bc-affdc8a87fd0" class="cell" data-execution_count="244">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the data frame to make sure that the sex values are male or female</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Sex"</span>].isin([<span class="st">"MALE"</span>, <span class="st">"FEMALE"</span>])]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify the data frame to make sure that body mass and species have correct values</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Shorten the species names to avoid redundancy</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Species"</span>] <span class="op">=</span> df[<span class="st">"Species"</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="244">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Body Mass (g)</th>
+<th data-quarto-table-cell-role="th">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>MALE</td>
+<td>3750.0</td>
+<td>Adelie</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>FEMALE</td>
+<td>3800.0</td>
+<td>Adelie</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>FEMALE</td>
+<td>3250.0</td>
+<td>Adelie</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>FEMALE</td>
+<td>3450.0</td>
+<td>Adelie</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>MALE</td>
+<td>3650.0</td>
+<td>Adelie</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </section>
 <section id="creating-the-graphs" class="level2">
 <h2 class="anchored" data-anchor-id="creating-the-graphs">Creating The Graphs</h2>
-<p>The next step is deciding how to represent your chosen data. I personally wanted to study the range of the body mass for each sex and species of the penguins and therefore decided to use boxplots that were vertically stacked to see how the ranged differed. Using the cleaned data, I split the data for the male and females. Then, creating a figure with two subplots stacked on top each other and sharing their x-axis of body mass in grams, I was able to plot the data. Setting the y-axis to be the species of the penguins and the titles of each of the subplots to represent each of the sexes, the visualization allowed us to see how the body masses of penguins ranged for each species considering their sex.</p>
-<div id="64c511c5-b01a-493e-ad2e-4a67cdb65722" class="cell" data-execution_count="103">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the male graph by selecting penguins of that sex</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>male_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"MALE"</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>male_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the female graph by selecting penguins of that sex</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>female_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"FEMALE"</span>]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>female_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#display graph</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The next step is deciding how to represent your chosen data. I personally wanted to study the range of the body mass for each sex and species of the penguins and therefore decided to use boxplots that were vertically stacked to see how the ranged differed. Creating a figure with two subplots sharing their x-axis of body mass in grams, I was able to plot the data. I created a function that would create the boxplots for the data considering which axis and sex were passed as parameters for the function to prevent redundancy. Using the cleaned data, the function would split the data depending on the sex. Setting the y-axis to be the species of the penguins and the titles of each of the subplots to represent each of the sexes, the visualization allows us to see how the body masses of penguins ranged for each species considering their sex.</p>
+<div id="64c511c5-b01a-493e-ad2e-4a67cdb65722" class="cell" data-execution_count="258">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_boxplot(i, sex):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates two boxplots for each sex on each axis</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">        i (int): axes number for the data visualization (0 or 1)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">        sex: which sex to represent in the subplot ('MALE' or 'FEMALE')</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">        None</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#divide the data</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> sex]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create the boxplot for the set data on the correct axis i</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(data<span class="op">=</span>data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[i])</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplots for each sex</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">0</span>, <span class="st">"MALE"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">1</span>, <span class="st">"FEMALE"</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -393,38 +508,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extra-graph-features" class="level2">
 <h2 class="anchored" data-anchor-id="extra-graph-features">Extra Graph Features</h2>
 <p>Once the graphs are created, extra aesthetic features can be added to improve the readability of the graphs. One such change was creating palette with three colors (each representing one of the species) using the seaborn library and applying the changes to each of the boxplots. The next change was setting the theme of the seaborn graphs to a standard whitegrid. This allowed for the creation of gridlines and clear borders to visualize the differences between the six boxplots better. Finally, adding labels for the axes and and titles for each of the subplots in addition to the legends representing the species colors improved the readability of the graph overall.</p>
-<div id="1fb4e98d-e514-488c-9410-488ad2b83b75" class="cell" data-execution_count="107">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the color palette for the graphs using seaborn library color schemes</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> sns.color_palette(<span class="st">"flare"</span>, n_colors<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#set the the theme and font scale of the graphs using the seaborn library</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">'whitegrid'</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the male graph by selecting penguins of that sex</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>male_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"MALE"</span>]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>male_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Male"</span>, ylabel<span class="op">=</span><span class="st">"Species"</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#create the legend</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(title<span class="op">=</span><span class="st">"Species"</span>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the female graph by selecting penguins of that sex</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>female_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"FEMALE"</span>]</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>female_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylabel<span class="op">=</span><span class="st">"Species"</span>, xlabel <span class="op">=</span> <span class="st">"Body Mass (g)"</span>, title<span class="op">=</span><span class="st">"Female"</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#format the layout of the graph and display</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1fb4e98d-e514-488c-9410-488ad2b83b75" class="cell" data-execution_count="250">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the color palette for the graphs using seaborn library color schemes</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> sns.color_palette(<span class="st">"flare"</span>, n_colors<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#set the the theme and font scale of the graphs using the seaborn library</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">'whitegrid'</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_boxplot(i, sex):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates two boxplots for each sex on each axis</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">        i (int): axes number for the data visualization (0 or 1)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">        sex: which sex to represent in the subplot ('MALE' or 'FEMALE')</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">        None</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#divide the data</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> sex]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create the boxplot for the set data on the correct axis i</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(data<span class="op">=</span>data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[i])</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplots for each sex</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">0</span>, <span class="st">"MALE"</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">1</span>, <span class="st">"FEMALE"</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Male"</span>, ylabel<span class="op">=</span><span class="st">"Species"</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylabel<span class="op">=</span><span class="st">"Species"</span>, xlabel <span class="op">=</span> <span class="st">"Body Mass (g)"</span>, title<span class="op">=</span><span class="st">"Female"</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">#format the layout of the graph and display</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -436,54 +557,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="final-code" class="level2">
 <h2 class="anchored" data-anchor-id="final-code"><strong>Final Code</strong></h2>
-<div id="13f680cd-6bc3-4743-a182-2bdb6b3b0e63" class="cell" data-execution_count="112">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import the necessary libraries</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame using the data and pandas library</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/pic16b-ucla/24W/main/datasets/palmer_penguins.csv"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#remove any values from the data frame where the sex is not male or female</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> penguins[penguins[<span class="st">"Sex"</span>].isin([<span class="st">"MALE"</span>, <span class="st">"FEMALE"</span>])].copy()</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#remove any values from the data frame where body mass is not an integer to represent grams</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Body Mass (g)"</span>].notnull().copy()]</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#shorten the species names to avoid redundancy</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Species"</span>] <span class="op">=</span> df[<span class="st">"Species"</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#create the color palette for the graphs using seaborn library color schemes</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> sns.color_palette(<span class="st">"flare"</span>, n_colors<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#set the the theme and font scale of the graphs using the seaborn library</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">'whitegrid'</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the male graph by selecting penguins of that sex</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>male_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"MALE"</span>]</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>male_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>])</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Male"</span>, ylabel<span class="op">=</span><span class="st">"Species"</span>)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">#create the legend</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(title<span class="op">=</span><span class="st">"Species"</span>)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the data for the female graph by selecting penguins of that sex</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>female_data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> <span class="st">"FEMALE"</span>]</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplot using the color palette, data, and proper x-axis and y-axis data</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>female_data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylabel<span class="op">=</span><span class="st">"Species"</span>, xlabel <span class="op">=</span> <span class="st">"Body Mass (g)"</span>, title<span class="op">=</span><span class="st">"Female"</span>)</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#format the layout of the graph and display</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="13f680cd-6bc3-4743-a182-2bdb6b3b0e63" class="cell" data-execution_count="252">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import the necessary libraries</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create a data frame using the data and pandas library</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/pic16b-ucla/24W/main/datasets/palmer_penguins.csv"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#create a copy of the data frame with chosen features</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> penguins[[<span class="st">"Sex"</span>, <span class="st">"Body Mass (g)"</span>, <span class="st">"Species"</span>]].copy()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#modify the data frame to make sure that the sex values are male or female</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Sex"</span>].isin([<span class="st">"MALE"</span>, <span class="st">"FEMALE"</span>])]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#modify the data frame to make sure that body mass and species have correct values</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Shorten the species names to avoid redundancy</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Species"</span>] <span class="op">=</span> df[<span class="st">"Species"</span>].<span class="bu">str</span>.split().<span class="bu">str</span>[<span class="dv">0</span>]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#create the color palette for the graphs using seaborn library color schemes</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> sns.color_palette(<span class="st">"flare"</span>, n_colors<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#set the the theme and font scale of the graphs using the seaborn library</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">'whitegrid'</span>, font_scale<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#create the figure with two vertical subplots that share their x-axis</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_boxplot(i, sex):</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates two boxplots for each sex on each axis</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">        i (int): axes number for the data visualization (0 or 1)</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">        sex: which sex to represent in the subplot ('MALE' or 'FEMALE')</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">        None</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#divide the data</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df[df[<span class="st">"Sex"</span>] <span class="op">==</span> sex]</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create the boxplot for the set data on the correct axis i</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(data<span class="op">=</span>data, x<span class="op">=</span><span class="st">"Body Mass (g)"</span>, y<span class="op">=</span><span class="st">"Species"</span>, hue<span class="op">=</span><span class="st">"Species"</span>,palette<span class="op">=</span>palette, width<span class="op">=</span><span class="fl">0.6</span>, dodge <span class="op">=</span> <span class="va">False</span>, ax<span class="op">=</span>ax[i])</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">#create the boxplots for each sex</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">0</span>, <span class="st">"MALE"</span>)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>create_boxplot(<span class="dv">1</span>, <span class="st">"FEMALE"</span>)</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co">#set the labels and titles of the graphs</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Male"</span>, ylabel<span class="op">=</span><span class="st">"Species"</span>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylabel<span class="op">=</span><span class="st">"Species"</span>, xlabel <span class="op">=</span> <span class="st">"Body Mass (g)"</span>, title<span class="op">=</span><span class="st">"Female"</span>)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#format the layout of the graph and display</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
