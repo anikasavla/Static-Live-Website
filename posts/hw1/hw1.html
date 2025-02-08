@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-data" class="level1">
 <h1>Importing Data</h1>
-<div id="c7153ccb-ab1d-4257-8312-453de1b6a0cb" class="cell" data-execution_count="331">
+<div id="c7153ccb-ab1d-4257-8312-453de1b6a0cb" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -207,21 +207,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pio.renderers.default<span class="op">=</span><span class="st">"iframe"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d09a330d-27e2-44b8-b470-3dfc86a12c65" class="cell" data-execution_count="332">
+<div id="d09a330d-27e2-44b8-b470-3dfc86a12c65" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#connecting to sql, creating the database   </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">"data.db"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#adding the countries data to the database</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> pd.read_csv(<span class="st">"hw1/countries.csv"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> pd.read_csv(<span class="st">"countries.csv"</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>countries.to_sql(<span class="st">"countries"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#adding the stations data to the database</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_csv(<span class="st">"hw1/stations.csv"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_csv(<span class="st">"stations.csv"</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>stations.to_sql(<span class="st">"stations"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#adding the temperature data to the database, removing rows without data</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> pd.read_csv(<span class="st">"hw1/temps.csv"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> pd.read_csv(<span class="st">"temps.csv"</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> temperatures.dropna(subset<span class="op">=</span>[<span class="st">"Temp"</span>])</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>temperatures.to_sql(<span class="st">"temperatures"</span>, conn, if_exists<span class="op">=</span><span class="st">"replace"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="first-query-function" class="level1">
 <h1>First Query Function</h1>
-<div id="de1d3536-67ce-49fd-bd04-98b5742f1c75" class="cell" data-execution_count="335">
+<div id="de1d3536-67ce-49fd-bd04-98b5742f1c75" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query_climate_database(db_file, country, year_begin, year_end, month):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -261,9 +261,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    conn.close()</span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> query_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7c1cd29f-aafe-4612-86d4-ff6628e22593" class="cell" data-execution_count="336">
+<div id="7c1cd29f-aafe-4612-86d4-ff6628e22593" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>query_climate_database(db_file <span class="op">=</span> <span class="st">"data.db"</span>, country <span class="op">=</span> <span class="st">"India"</span>, year_begin <span class="op">=</span> <span class="dv">1980</span>, year_end <span class="op">=</span> <span class="dv">2020</span>, month <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="336">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
 
@@ -398,9 +398,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1ca408d5-bd80-413a-838a-83ed9c9ebc77" class="cell" data-execution_count="337">
+<div id="1ca408d5-bd80-413a-838a-83ed9c9ebc77" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>query_climate_database(db_file <span class="op">=</span> <span class="st">"data.db"</span>, country <span class="op">=</span> <span class="st">"Australia"</span>, year_begin <span class="op">=</span> <span class="dv">2000</span>, year_end <span class="op">=</span> <span class="dv">2020</span>, month <span class="op">=</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="337">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 
 
@@ -538,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="geographic-scatter-function-for-yearly-temperature-increases" class="level1">
 <h1>Geographic Scatter Function for Yearly Temperature Increases</h1>
-<div id="ba2eca37-a383-4c14-b77f-74c67cc34087" class="cell" data-execution_count="339">
+<div id="ba2eca37-a383-4c14-b77f-74c67cc34087" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_coefficient_plot(db_file, country, year_begin, year_end, month, min_obs, <span class="op">**</span>kwargs):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -585,23 +585,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ed32271e-bc3d-4650-85b1-384837bb0b87" class="cell" data-scrolled="true" data-execution_count="340">
+<div id="ed32271e-bc3d-4650-85b1-384837bb0b87" class="cell" data-scrolled="true" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"data.db"</span>, <span class="st">"India"</span>, <span class="dv">1980</span>, <span class="dv">2020</span>, <span class="dv">1</span>, min_obs <span class="op">=</span> <span class="dv">10</span>, zoom <span class="op">=</span> <span class="dv">2</span>, mapbox_style<span class="op">=</span><span class="st">"carto-positron"</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                       color_continuous_scale<span class="op">=</span>px.colors.diverging.RdGy_r)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_340.html" frameborder="0" allowfullscreen=""></iframe>
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_70.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
 </div>
-<div id="d1488e22-fac3-4527-abff-70d055232b70" class="cell">
+<div id="d1488e22-fac3-4527-abff-70d055232b70" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_coefficient_plot(<span class="st">"data.db"</span>, <span class="st">"Australia"</span>, <span class="dv">2000</span>, <span class="dv">2020</span>, <span class="dv">12</span>, min_obs <span class="op">=</span> <span class="dv">10</span>, zoom <span class="op">=</span> <span class="dv">2</span>, mapbox_style<span class="op">=</span><span class="st">"carto-positron"</span>,</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                       color_continuous_scale<span class="op">=</span>px.colors.diverging.BrBG)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_71.html" frameborder="0" allowfullscreen=""></iframe>
+</div>
 </div>
 </section>
 <section id="second-query-function" class="level1">
 <h1>Second Query Function</h1>
-<div id="6fe6e8af-3700-415c-9357-dafbeece6711" class="cell">
+<div id="6fe6e8af-3700-415c-9357-dafbeece6711" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query_climate_database_2(db_file, year_begin, year_end):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -628,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="additional-graphs" class="level1">
 <h1>Additional Graphs</h1>
-<div id="63c076c4-eb40-4d36-a55f-6e58f3a7659b" class="cell">
+<div id="63c076c4-eb40-4d36-a55f-6e58f3a7659b" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_choropleth(db_file, year, <span class="op">**</span>kwargs):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Answers the following question: How does the average temperature per country differ in a particular year?</span></span>
@@ -659,11 +662,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8db07fa3-59f0-4446-8ebb-c88753558cfb" class="cell">
+<div id="8db07fa3-59f0-4446-8ebb-c88753558cfb" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_choropleth(<span class="st">"data.db"</span>, <span class="dv">2020</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_76.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
-<div id="ab894a4c-c5c2-4ab1-a417-247853081275" class="cell">
+</div>
+<div id="ab894a4c-c5c2-4ab1-a417-247853081275" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_bar_graph(db_file, year_begin, year_end, <span class="op">**</span>kwargs):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Answers the following question: How does the average temperature globally per month differ in a range of years?</span></span>
@@ -699,11 +705,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="78d0a277-cd2d-4354-a006-7ecf6ec2c175" class="cell">
+<div id="78d0a277-cd2d-4354-a006-7ecf6ec2c175" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_bar_graph(<span class="st">"data.db"</span>, <span class="dv">2016</span>, <span class="dv">2018</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_78.html" frameborder="0" allowfullscreen=""></iframe>
 </div>
-<div id="a5b0b987-1895-4774-9a54-809000b6f4ab" class="cell">
+</div>
+<div id="a5b0b987-1895-4774-9a54-809000b6f4ab" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temperature_line_graph(db_file, year_begin, year_end, <span class="op">**</span>kwargs):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Answers the following question: How does the average temperature globally per month differ in a range of years?</span></span>
@@ -739,9 +748,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cc7ca178-a2ac-4135-94e1-9248f0923338" class="cell">
+<div id="cc7ca178-a2ac-4135-94e1-9248f0923338" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> temperature_line_graph(<span class="st">"data.db"</span>, <span class="dv">2010</span>, <span class="dv">2020</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<iframe scrolling="no" width="100%" height="545px" src="iframe_figures/figure_80.html" frameborder="0" allowfullscreen=""></iframe>
+</div>
 </div>
 
 
