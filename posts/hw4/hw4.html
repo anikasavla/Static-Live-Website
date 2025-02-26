@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="24b03267-3131-45c2-bd27-96a0534a4e8d" class="cell" data-execution_count="131">
+<div id="24b03267-3131-45c2-bd27-96a0534a4e8d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax.experimental.sparse <span class="im">import</span> BCOO</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f0d6af64-e8ff-46ec-8693-14aa34b2176c" class="cell" data-execution_count="59">
+<div id="f0d6af64-e8ff-46ec-8693-14aa34b2176c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iterations <span class="op">=</span> <span class="dv">2700</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">101</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">0.2</span></span>
@@ -212,21 +212,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="38b3c635-7a08-4a92-b2bb-ee1924f1bf5b" class="cell" data-execution_count="133">
+<div id="38b3c635-7a08-4a92-b2bb-ee1924f1bf5b" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualization(visuals):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">3</span>,<span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">10</span>,<span class="dv">10</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(visuals)):    </span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        axes[i].imshow(visuals[i])</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">*</span><span class="dv">300</span><span class="sc">}</span><span class="ss">th Iteration"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(<span class="ss">f"</span><span class="sc">{</span>(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">300</span><span class="sc">}</span><span class="ss">th Iteration"</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="with-matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="with-matrix-multiplication">With Matrix Multiplication</h3>
-<div id="a9c7f74e-7236-4c89-a009-bb37d8c16493" class="cell" data-execution_count="138">
+<div id="a9c7f74e-7236-4c89-a009-bb37d8c16493" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_matvecmul(A, u, epsilon):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Advances the simulation by one timestep, via matrix-vector multiplication</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> u <span class="op">+</span> epsilon <span class="op">*</span> (A <span class="op">@</span> u.flatten()).reshape((N, N))</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> u</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2410547d-abc7-4615-9cf2-ef49e01ed0cc" class="cell" data-execution_count="49">
+<div id="2410547d-abc7-4615-9cf2-ef49e01ed0cc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_A(N):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates matrix A, a 2D finite difference matrix</span></span>
@@ -258,22 +258,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> np.diag(diagonals[<span class="dv">0</span>]) <span class="op">+</span> np.diag(diagonals[<span class="dv">1</span>], <span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">2</span>], <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> np.diag(diagonals[<span class="dv">3</span>], N) <span class="op">+</span> np.diag(diagonals[<span class="dv">4</span>], <span class="op">-</span>N)</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9945aba2-da40-4647-ada2-3c291bd0e568" class="cell" data-execution_count="139">
+<div id="9945aba2-da40-4647-ada2-3c291bd0e568" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>time1 <span class="op">=</span> time.time()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> get_A(N)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> u0.copy()</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>visuals_matrix <span class="op">=</span> []</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, iterations<span class="op">+</span><span class="dv">1</span>):</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_matvecmul(A, u, epsilon)</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i<span class="op">%</span><span class="dv">300</span> <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        visuals_matrix.append(u.copy())</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>time2 <span class="op">=</span> time.time()</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It took </span><span class="sc">{</span>time2<span class="op">-</span>time1<span class="sc">}</span><span class="ss"> seconds to perform that task."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>It took 964.9552779197693 seconds to perform that task.</code></pre>
+<pre><code>It took 881.7408978939056 seconds to perform that task.</code></pre>
 </div>
 </div>
-<div id="5ffffb61-faf1-48c4-b5f4-17633632a79d" class="cell" data-execution_count="140">
+<div id="5ffffb61-faf1-48c4-b5f4-17633632a79d" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>visualization(visuals_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sparse-matrix-in-jax" class="level3">
 <h3 class="anchored" data-anchor-id="sparse-matrix-in-jax">Sparse Matrix In JAX</h3>
-<div id="7adb36bf-51e4-4777-90a3-8d5ab33cf7ba" class="cell" data-execution_count="51">
+<div id="7adb36bf-51e4-4777-90a3-8d5ab33cf7ba" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_sparse_A(N):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Creates sparse matrix A</span></span>
@@ -322,23 +322,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    A_sp_matrix <span class="op">=</span> BCOO((values, jnp.stack([rows, cols], axis<span class="op">=</span><span class="dv">1</span>)), shape<span class="op">=</span>(n, n))</span>
 <span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A_sp_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="581f7e1f-8c2c-44c2-be86-3ea469a68643" class="cell" data-execution_count="145">
+<div id="581f7e1f-8c2c-44c2-be86-3ea469a68643" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>time1 <span class="op">=</span> time.time()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>jitted_advance_time_matvecmul <span class="op">=</span> jax.jit(advance_time_matvecmul)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> jnp.asarray(u0)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> get_sparse_A(N)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>visuals_sparse <span class="op">=</span> []</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,iterations<span class="op">+</span><span class="dv">1</span>):</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> jitted_advance_time_matvecmul(A, u, epsilon)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i<span class="op">%</span><span class="dv">300</span> <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        visuals_sparse.append(u.copy())</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>time2 <span class="op">=</span> time.time()</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It took </span><span class="sc">{</span>time2<span class="op">-</span>time1<span class="sc">}</span><span class="ss"> seconds to perform that task."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>It took 58.400983810424805 seconds to perform that task.</code></pre>
+<pre><code>It took 52.79099154472351 seconds to perform that task.</code></pre>
 </div>
 </div>
-<div id="9dfe96f2-03a9-4e46-bbe3-2aa3c1e0c4e3" class="cell" data-execution_count="146">
+<div id="9dfe96f2-03a9-4e46-bbe3-2aa3c1e0c4e3" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>visualization(visuals_sparse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -351,7 +351,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="direct-operation-with-numpy" class="level3">
 <h3 class="anchored" data-anchor-id="direct-operation-with-numpy">Direct operation with numpy</h3>
-<div id="36891e3a-9d49-449b-bb9c-8561342da880" class="cell" data-execution_count="53">
+<div id="36891e3a-9d49-449b-bb9c-8561342da880" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_numpy(u, epsilon):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Advances the simulation by one timestep, using NumPy</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -368,21 +368,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    u_new <span class="op">=</span> u <span class="op">+</span> epsilon <span class="op">*</span> sum_rolled</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> u_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="51946bfe-b7ce-44d9-a57c-1f8edd4af24d" class="cell" data-execution_count="160">
+<div id="51946bfe-b7ce-44d9-a57c-1f8edd4af24d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>time1 <span class="op">=</span> time.time()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.asarray(u0)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>visuals_numpy <span class="op">=</span> []</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, iterations<span class="op">+</span><span class="dv">1</span>):</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> advance_time_numpy(u, epsilon)</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i<span class="op">%</span><span class="dv">300</span> <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        visuals_numpy.append(u.copy())</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>time2 <span class="op">=</span> time.time()</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It took </span><span class="sc">{</span>time2<span class="op">-</span>time1<span class="sc">}</span><span class="ss"> seconds to perform that task."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>It took 2.1722936630249023 seconds to perform that task.</code></pre>
+<pre><code>It took 2.411999464035034 seconds to perform that task.</code></pre>
 </div>
 </div>
-<div id="f6d5bdf2-b3c8-4b22-9174-9da95354f6c6" class="cell" data-execution_count="161">
+<div id="f6d5bdf2-b3c8-4b22-9174-9da95354f6c6" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>visualization(visuals_numpy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -395,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="with-jax" class="level3">
 <h3 class="anchored" data-anchor-id="with-jax">With jax</h3>
-<div id="6738de61-382e-496c-b111-1f79c300dcf8" class="cell" data-execution_count="55">
+<div id="6738de61-382e-496c-b111-1f79c300dcf8" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> advance_time_jax(u, epsilon):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Advances the simulation by one timestep, using JAX NumPy</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
@@ -412,22 +412,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    u_new <span class="op">=</span> u <span class="op">+</span> epsilon <span class="op">*</span> sum_rolled</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> u_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="384842ef-0140-4e9b-8565-af8c94031143" class="cell" data-execution_count="166">
+<div id="384842ef-0140-4e9b-8565-af8c94031143" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>time1 <span class="op">=</span> time.time()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>jitted_advance_time_jax <span class="op">=</span> jax.jit(advance_time_jax)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> jnp.asarray(u0)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>visuals_jax <span class="op">=</span> []</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,iterations<span class="op">+</span><span class="dv">1</span>):</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> jitted_advance_time_jax(u, epsilon)</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i<span class="op">%</span><span class="dv">300</span> <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        visuals_jax.append(u.copy())</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>time2 <span class="op">=</span> time.time()</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It took </span><span class="sc">{</span>time2<span class="op">-</span>time1<span class="sc">}</span><span class="ss"> seconds to perform that task."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>It took 0.9997022151947021 seconds to perform that task.</code></pre>
+<pre><code>It took 0.9609088897705078 seconds to perform that task.</code></pre>
 </div>
 </div>
-<div id="4f34d107-04cd-4d5c-a891-f36b5800599b" class="cell" data-execution_count="167">
+<div id="4f34d107-04cd-4d5c-a891-f36b5800599b" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>visualization(visuals_jax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
